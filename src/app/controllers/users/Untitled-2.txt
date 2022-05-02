@@ -1,0 +1,34 @@
+db.getCollection('order').aggregate([
+    {$match: {_id : ObjectId("5cf0eb96acc5ce0564820b13")}},
+    {$lookup: {from: 'orderDetail', localField: '_id', foreignField: 'orderId', as: 'orderDetail'}},
+    {$unwind : "$orderDetail"},
+    {$match : {"orderDetail.statusIndex" :"1"}},
+    {$lookup: {from: 'supplierProducts', localField: 'orderDetail.supplierProductId', foreignField: '_id', as: 'supplierProduct'}},
+    {$unwind : "$supplierProduct"},
+    {$lookup: {from: 'suppliercategories', localField: 'supplierProduct.categoryId', foreignField: '_id', as: 'category'}},
+    {$unwind : "$category"},
+    {
+        $group: {
+            _id  : {
+                id : "$orderDetail.supplierProductId",
+                name: "$supplierProduct.name",
+                categoryId:"$category._id",
+                categoryName: "$category.name",
+            },
+            items : {$sum : "$orderDetail.quantity"}
+        }
+    },
+    {
+        $group: {
+            _id  : "$_id.categoryId",
+            name: {$first: "$_id.categoryName"},
+            products: {
+                $push : {
+                    _id  : "$_id.id",
+                    name: "$_id.name",
+                    items: "$items"
+                }
+            }
+        }
+    }
+])

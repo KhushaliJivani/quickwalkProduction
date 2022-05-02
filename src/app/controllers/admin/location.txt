@@ -1,0 +1,69 @@
+exports.locationOrder = async (req,res) => {
+    try{
+        const { params } = req.body;
+        let data = await params.location.forEach(async location => {
+            let childLocation = await childLocationOrderUpdate(location,params,res);
+            let parentLocation = await parentLocationOrderUpdate(location,params,res);
+        })
+        setTimeout(() => {
+            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            res.status(200).send({code:200, message: Message.infoMessage.setLocationOrder, data: [],error: []})
+        },1000)
+    }catch (err){
+        console.log("err",err)
+        res.status(400).send({code:400, message: Message.errorMessage.genericError, data: [],error: err});
+    }
+}
+
+const childLocationOrderUpdate = async (location,params,res) => {
+    let changeLocationLevel = location.preferredIndex.split('-')
+    await locationModel.aggregate([
+        {
+            "$match":{ "status":"1","_id":mongoose.Types.ObjectId(location._id)},
+        },
+        {
+            "$graphLookup": {
+                "from": "location",
+                "startWith": "$_id",
+                "connectFromField": "_id",
+                "connectToField": "parentId",
+                "depthField": "depth",
+                "as": "parent"
+            }
+        }
+    ])
+    .then(childLocation => {
+        console.log("childLocation : ",childLocation[0].parent)
+        childLocation[0].parent.forEach(childLocationDetail => {
+            console.log("before  split ChildLocation : ",childLocationDetail.preferredIndex)
+            let sepratedChildLocation = childLocationDetail.preferredIndex.split('-')
+            console.log("before  sepratedChildLocation : ",sepratedChildLocation)
+            sepratedChildLocation[params.locationLevel - 1] = changeLocationLevel[params.locationLevel-1];
+            console.log("after adding sepratedChildLocation : ",sepratedChildLocation)
+            console.log("sepratedChildLocation.join('-') : ",sepratedChildLocation.join('-'))
+            locationModel.findByIdAndUpdate(childLocationDetail._id,{preferredIndex: sepratedChildLocation.join('-')},{new:true})
+            .then(locationResult => {}).catch((err) => {
+                console.log("err",err)
+                res.status(400).send({code: 400, message: Message.errorMessage.genericError, data: [], error: err});
+            })
+        })
+        // console.log("childLocation ----------------------------------- ",childLocation[0].parent)
+    }).catch((err) => {
+        console.log("err",err)
+        res.status(400).send({code: 400, message: Message.errorMessage.genericError, data: [], error: err});
+    })
+}
+
+const parentLocationOrderUpdate = async (location,params,res) => {
+    console.log("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><<><><<><><><")
+    console.log("before parentLocationSepreted : ",location.preferredIndex)
+    // let parentLocationSepreted = location.preferredIndex.split('-');
+    // parentLocationSepreted[params.locationLevel-1] = preferredIndex;
+    // console.log("after updated parentLocationSepreted : ",parentLocationSepreted)
+    return await locationModel.findByIdAndUpdate(location._id,{preferredIndex: location.preferredIndex},{new:true})
+    .then(locationRange => {
+    }).catch((err) => {
+        console.log("err",err)
+        res.status(400).send({code: 400, message: Message.errorMessage.genericError, data: [], error: err});
+    });
+}

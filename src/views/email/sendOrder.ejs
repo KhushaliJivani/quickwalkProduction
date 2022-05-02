@@ -1,0 +1,175 @@
+
+
+
+<% if(languageType == "english") {%>
+    <html lang="en" class="">
+<%} else {%> 
+    <html lang="nl" class="">
+<%}%>
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Email Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+
+</head>
+<!-- <body>
+    <table cellspacing="0" cellpadding="0" style="background-color: #f3f3f3;font-family: 'Poppins', sans-serif;width: 600px;border-collapse: collapse;margin: auto;width: 100%;max-width: 600px;">
+        <tbody>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td
+                                style="text-align: center;padding: 20px; background-color: #e2e2e2; border-bottom: solid 3px #1e88e5;">
+                                <img width="160" style="width: 160px;max-width: 100%;" alt="" src="<%= logoUrl%><%= envPort%>/asset/img/logo.png">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color: #cccccc; line-height: 18px;font-size: 16px;font-weight: 600;color: #545454; text-align: center;padding: 15px 0;">Order Form</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 20px;">
+                                <h4 style="line-height: 18px;margin: 0 0 10px;font-size: 16px;font-weight: 600;color: #545454;"><%= mailContent.content1 %> <%= supplierName %></h4>
+                                <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content2 %><%= mailContent.content3 %><%= businessAdmin %>.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <% for (var i = 0; i < orderProduct.length; i++) { %>
+            <tr>
+                <td style="padding: 10px 0; background-color: #fff;">
+                    <table cellspacing="0" cellpadding="0"
+                        style="width: 100%;border-collapse: collapse;text-align: center;">
+                        <tr>
+                        <% if(orderProduct[i].name){ %>
+                            <th colspan="4" style="background-color: #6d6d6d; color: #fff;font-weight: 400;padding: 5px 10px; font-size: 16px;">Category : <%= orderProduct[i].name %></th>
+                        <% } 
+                        %>
+                        </tr>
+                        <tr>
+                            <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content4 %></th>
+                            <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content7 %></th>
+                            <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content5 %></th>
+                            <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content6 %></th>
+                        </tr>
+                        <% for (var j = 0; j < orderProduct[i].products.length; j++) {
+                                if((orderProduct[i].products[j].items * orderProduct[i].products[j].data[0].calculation) == "0"){ %>
+                                    <% }
+                                        else{    
+                                    %>
+                                    <tr>
+                                        <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= j %></td>
+                                        <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].name %></td>
+                                        <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].items %></td>
+                                        <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].packaging %></td>
+                                    </tr>
+                            <%  }
+                            }
+                        %>
+                    </table>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body> -->
+
+
+
+
+<!-- NEW MAIL CHANGES -->
+<body>
+        <table cellspacing="0" cellpadding="0" style="background-color: #f3f3f3;font-family: 'Poppins', sans-serif;width: 600px;border-collapse: collapse;margin: auto;width: 100%;max-width: 600px;">
+            <tbody>
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td
+                                    style="text-align: center;padding: 20px; background-color: #e2e2e2; border-bottom: solid 3px #1e88e5;">
+                                    <img width="160" style="width: 160px;max-width: 100%;" alt="" src="<%= logoUrl%><%= envPort%>/asset/img/logo.png">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #cccccc; line-height: 18px;font-size: 16px;font-weight: 600;color: #545454; text-align: center;padding: 15px 0;"><%= mailContent.content0 %></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 20px;">
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content1 %> <%= businessAdmin %></p>
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content2 %>: <%= expectedDeliveryDate%></p>
+                                    <br><br>
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content3 %>:</p><br>
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content4 %> <%= businessAdmin %>, <%= mailContent.content5 %> <%= expectedDeliveryDate%>.</p><br>
+                                    <% if(remark){ %>
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content6 %>: <%= remark %></p><br>
+                                    <% } %>
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= mailContent.content11 %></p><br>
+                                    <p style="margin: 0;font-size: 14px;color: #3e3e3e;"><%= businessAdmin %></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <% for (var i = 0; i < orderProduct.length; i++) { %>
+                <tr>
+                    <td style="padding: 10px 0; background-color: #fff;">
+                        <table cellspacing="0" cellpadding="0"
+                            style="width: 100%;border-collapse: collapse;text-align: center;">
+                            <tr>
+                            <% if(orderProduct[i].name){ %>
+                                <th colspan="4" style="background-color: #6d6d6d; color: #fff;font-weight: 400;padding: 5px 10px; font-size: 16px;">Category : <%= orderProduct[i].name %></th>
+                            <% } 
+                            %>
+                            </tr>
+                            <tr>
+                                <% if(supplierProductUniqueCode === "1"){ %>
+                                    <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content7 %></th>
+                                <% } %>
+                                <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content10 %></th>
+                                <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content8 %></th>
+                                <th style="text-align: left;border: solid 1px #fff;background-color: #1e88e5; color: #fff;font-weight: 600;padding: 5px 10px; font-size: 14px;"><%= mailContent.content9 %></th>
+                            </tr>
+                            <% for (var j = 0; j < orderProduct[i].products.length; j++) {
+                                    if((orderProduct[i].products[j].items * orderProduct[i].products[j].data[0].calculation) == "0"){ %>
+                                        <% }
+                                            else{    
+                                        %>
+                                        <tr>
+                                            <% if(supplierProductUniqueCode === "1"){ %>
+                                                <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].uniqueProductKey %></td>
+                                            <% } %>
+                                            <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].name %></td>
+                                            <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].items %></td>
+                                            <td style="text-align: left;border: solid 1px #eee;color: #5d5d5d;font-weight: 400;padding: 5px 10px;font-size: 14px;"><%= orderProduct[i].products[j].packaging %></td>
+                                        </tr>
+                                <%  }
+                                }
+                            %>
+                            <% if(applicationStatus == '1'){ %>
+                                <p style="margin: 15px 0 0 0;font-size: 14px;color: #3e3e3e;">would have been send to : <a style="color:#1e88e5;" href="mailto:<%= originalToEMail %>"><%= originalToEMail %> </a></p>
+                            <% } %>
+                        </table>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>

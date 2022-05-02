@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<% if(languageType == "english") {%>
+    <html lang="en" class="">
+<%} else {%> 
+    <html lang="nl" class="">
+<%}%>
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Email Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+
+<body>
+    <table cellspacing="0" cellpadding="0"
+        style="background-color: #f3f3f3;font-family: 'Poppins', sans-serif;width: 600px;border-collapse: collapse;margin: auto;width: 100%;max-width: 600px;">
+        <tbody>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td
+                                style="text-align: center;padding: 20px; background-color: #e2e2e2; border-bottom: solid 3px #1e88e5;">
+                                <img width="160" style="width: 160px;max-width: 100%;" alt="" src="<%= logoUrl%><%= envPort%>/asset/img/logo.png">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 20px;">
+                                <h4
+                                    style="line-height: 18px;margin: 0 0 10px;font-size: 16px;font-weight: 600;color: #545454;">
+                                    <%= mailContent.content1 %> <%= user.firstName%></h4>
+                                <p style="margin: 0;font-size: 14px;color: #3e3e3e;">Hi ,<br><%= mailContent.content2 %></p>
+                                <!-- <h4
+                                    style="line-height: 18px;margin: 0 0 10px;font-size: 16px;font-weight: 600;color: #545454;">
+                                    Token: <%= user.emailVerificationToken%></h4> -->
+                                <a style="padding: 10px 15px;background-color: #1e88e5;display: block;font-size: 14px;line-height: 17px;color: #fff;text-decoration: none;margin-top: 10px;"
+                                    href="<%=URL%>verify/<%=user.emailVerificationToken%>"><%= mailContent.content3 %></a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td
+                                style="font-size:14px;text-align: center;padding: 10px; background-color: #e2e2e2; border-top: solid 3px #1e88e5;">
+                                <%= mailContent.content4 %> <a style="color:#1e88e5;"
+                                    href="mailto:jenno.bogaert@quick-walk.com">jenno.bogaert@quick-walk.com</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<!-- END BODY -->
+
+</html>

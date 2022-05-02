@@ -1,0 +1,49 @@
+orderModel.aggregate([
+            {
+                $match: {
+                    "status": "0"
+                }
+            },
+            {
+                $lookup: {
+                    from: 'companysuppliers',
+                    localField: 'supplierId',
+                    foreignField: '_id',
+                    as: 'companySupplierDetails'
+                }
+            },
+            {
+                $unwind: '$companySupplierDetails'
+            },
+            {
+                $lookup: {
+                    from: 'suppliers',
+                    localField: 'companySupplierDetails.supplierId',
+                    foreignField: '_id',
+                    as: 'SupplierDetails'
+                }
+            },
+            {
+                $project: {
+                    "SupplierDetails": "$SupplierDetails"
+                }
+            }
+        ])
+            .then(supplierDetails => {
+                console.log("supplierDetails:-----------------------------------------------------", supplierDetails)
+
+                res.status(200).send({
+                    code: 200,
+                    message: Message.infoMessage.getDetails,
+                    data: supplierDetails,
+                    err: []
+                });
+            })
+            .catch(err => {
+                res.status(401).send({
+                    code: 401,
+                    message: Message.errorMessage.genericError,
+                    data: [],
+                    error: err
+                });
+            })

@@ -1,0 +1,9 @@
+node_modules
+.vscode
+package-lock.json
+README.md
+yarn.lock
+src/public/upload/location/
+src/public/upload/product/
+src/public/upload/profile-image/
+src/public/upload/supplierLogo/
