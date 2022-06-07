@@ -39,7 +39,7 @@ router.get('/status', passport.authenticate('User', {
  *
  * @apiError (Bad Request 400)   ValidationError  Some parameters may contain invalid values
  */
-router.post('/signup', validate(authValidator.signup), authController.singup);
+router.post('/signup', validate(authValidator.signup), authController.signup);
 
 /**
  * @api {post} /login login user

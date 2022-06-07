@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
  * @param res
  * @returns {*}
  */
-exports.singup = async (req, res) => {
+exports.signup = async (req, res) => {
     try {
         req.body.params.adminType = "0";
         const saveToUser = Admin(req.body.params);

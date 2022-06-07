@@ -3,6 +3,8 @@ node_modules
 package-lock.json
 README.md
 yarn.lock
+db/
+dist/
 src/public/upload/location/
 src/public/upload/product/
 src/public/upload/profile-image/

@@ -18,14 +18,14 @@ import SystemSettings, { comparePowerPassword } from '../../models/systemSetting
  * @param res
  * @returns {*}
  */
-exports.singup = async (req, res) => {
+exports.signup = async (req, res) => {
     try {
         req.body.params.emailVerificationToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         req.body.params.emailVerificationTokenExpire = config.emailVerifyTokenExpireTime;
         const saveToUser = UserModel(req.body.params);
         await saveToUser.save()
             .then((user) => {
-                ejs.renderFile(config.mailUrl + "email/user/singUp.ejs", { user: user, URL: config.frontendUrl }).then(content => {
+                ejs.renderFile(config.mailUrl + "email/user/signUp.ejs", { user: user, URL: config.frontendUrl }).then(content => {
                     const mailOptions = { to: user.userName, subject: Message.emails.signup.subject, html: content };
                     SMTP.email(mailOptions)
                         .then(result => {

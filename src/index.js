@@ -92,16 +92,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 // listen to requests
 
-const privateKey = fs.readFileSync(
-    '/etc/letsencrypt/live/api.quick-walk.com/privkey.pem',
-    'utf8'
-  );
-const certificate = fs.readFileSync(
-    '/etc/letsencrypt/live/api.quick-walk.com/fullchain.pem',
-    'utf8'
-);
-var credentials = {key: privateKey, cert: certificate};
-https.createServer(credentials, app).listen(PORT);
+// const privateKey = fs.readFileSync(
+//     '/etc/letsencrypt/live/api.quick-walk.com/privkey.pem',
+//     'utf8'
+//   );
+// const certificate = fs.readFileSync(
+//     '/etc/letsencrypt/live/api.quick-walk.com/fullchain.pem',
+//     'utf8'
+// );
+// var credentials = {key: privateKey, cert: certificate};
+// https.createServer(credentials, app).listen(PORT);
 // app.listen(PORT);
+app.listen(PORT,"192.168.1.215");
 
 module.exports = app;

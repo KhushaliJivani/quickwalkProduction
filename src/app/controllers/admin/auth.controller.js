@@ -18,6 +18,7 @@ import mailLanguagesModel from '../../models/mailLanguages.model';
  */
 exports.login = async (req, res) => {
     try {
+        console.log("login here...............");
         const { email, password } = req.body.params;
         await Admin.findOne({ 'email': email.toLowerCase(), adminType: 1, applicationStatus : {$in : ['1', '2']}}).populate('language')
             .then((admin) => {
@@ -69,8 +70,11 @@ exports.login = async (req, res) => {
  * @param res
  * @returns {*}
  */
-exports.singup = async (req, res) => {
+exports.signup = async (req, res) => {
     try {
+
+
+        console.log("signup call.....................");
         const { params } = req.body;
         params.emailVerificationToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         params.emailVerificationTokenExpire = config.emailVerifyTokenExpireTime;
@@ -78,7 +82,7 @@ exports.singup = async (req, res) => {
         const saveToUser = Admin(req.body.params);
         await saveToUser.save()
             .then((admin) => {
-                ejs.renderFile(config.mailUrl + "email/admin/singUp.ejs", { admin: admin, URL: config.adminUrl,clientMail:config.clientMail }).then(content => {
+                ejs.renderFile(config.mailUrl + "email/admin/signUp.ejs", { admin: admin, URL: config.adminUrl,clientMail:config.clientMail }).then(content => {
                     const mailOptions = { to: admin.email, subject: Message.emails.signup.subject, html: content };
                     SMTP.email(mailOptions)
                         .then(result => {

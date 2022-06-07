@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
  * @param res
  * @returns {*}
  */
-exports.singup = async (req, res) => {
+exports.signup = async (req, res) => {
     try {
         req.body.params.emailVerificationToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         req.body.params.emailVerificationTokenExpire = config.emailVerifyTokenExpireTime;

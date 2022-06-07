@@ -1,7 +1,8 @@
 module.exports = {
   development: {
     port: 4000, // assign your own port no
-    mongoUri: 'mongodb://192.168.1.195:27017/quickWalk',
+    // mongoUri: 'mongodb://192.168.1.195:27017/quickWalk',
+    mongoUri: 'mongodb://localhost:27017/quickWalk',
     adminUri: 'http://localhost:4200/',
     masterAdminUri: 'https://quickwalk-admin.viitorcloud.in/',
     userUri: 'http://localhost:4200/',

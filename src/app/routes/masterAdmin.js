@@ -50,7 +50,7 @@ router.post('/login', validate(authValidator.login), authController.login);
  *
  * @apiError (Bad Request 400)   ValidationError  Some parameters may contain invalid values
  */
-router.post('/signup', validate(authValidator.signup), authController.singup);
+router.post('/signup', validate(authValidator.signup), authController.signup);
 
 /**
  * @api {post} /forgotPassword 
